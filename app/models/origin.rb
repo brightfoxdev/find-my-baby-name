@@ -1,4 +1,4 @@
 class Origin < ApplicationRecord
-    has many :name_origin, dependent: :destroy 
+    has_many :name_origin, dependent: :destroy 
 
 end
