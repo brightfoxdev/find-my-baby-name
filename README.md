@@ -1,24 +1,25 @@
-# README
+# Find My Baby Name
+## Developed by Jessica Nguyen
+### Bright Fox
+[Jessica Nguyen Portfolio](https://www.brightfox.dev)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Links
+[Lucid Chart Database Model](https://lucid.app/lucidchart/baae520d-475c-4a20-9d88-8fc68a5c929c/edit?viewport_loc=-121%2C-63%2C1579%2C763%2C0_0&invitationId=inv_d09dd59c-9497-48e0-b16c-128a843fce46)
 
-Things you may want to cover:
+[Figma Wire Frames](https://www.figma.com/file/wtBIlxC9R4Xr0XHjHguziX/Baby-Name?node-id=0%3A1&t=ZOVoFUrwFawmF2ls-1)
 
-* Ruby version
+### Lucid Chart
 
-* System dependencies
+### Figma
 
-* Configuration
+---
 
-* Database creation
+### Dependencies Installed in React
+- Axios
+- React Router
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Dependencies Installed in Rails
+- pry
+- better_errors
+- binding_of_caller
+- faker
