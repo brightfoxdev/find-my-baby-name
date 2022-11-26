@@ -10,19 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_25_034832) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_26_210213) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "genders", force: :cascade do |t|
-    t.string "gender"
+  create_table "friend_lists", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "friend_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["friend_id"], name: "index_friend_lists_on_friend_id"
+    t.index ["user_id"], name: "index_friend_lists_on_user_id"
+  end
+
+  create_table "friends", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_friends_on_user_id"
   end
 
   create_table "group_users", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "group_id", null: false
+    t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_group_users_on_group_id"
@@ -31,23 +42,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_034832) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
   create_table "labels", force: :cascade do |t|
-    t.string "label"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "name_genders", force: :cascade do |t|
-    t.bigint "name_id", null: false
-    t.bigint "gender_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["gender_id"], name: "index_name_genders_on_gender_id"
-    t.index ["name_id"], name: "index_name_genders_on_name_id"
   end
 
   create_table "name_labels", force: :cascade do |t|
@@ -71,6 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_034832) do
   create_table "names", force: :cascade do |t|
     t.string "name"
     t.text "meaning"
+    t.string "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -121,10 +126,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_034832) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "friend_lists", "friends"
+  add_foreign_key "friend_lists", "users"
+  add_foreign_key "friends", "users"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
-  add_foreign_key "name_genders", "genders"
-  add_foreign_key "name_genders", "names"
   add_foreign_key "name_labels", "labels"
   add_foreign_key "name_labels", "names"
   add_foreign_key "name_origins", "names"
